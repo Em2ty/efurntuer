@@ -8,11 +8,9 @@ import { formatCurrency } from '@/utils/format';
 import Image from 'next/image';
 import React from 'react'
 
-interface Params{
-  id: string
-}
 
- async function ProductDetailsPage({params}:{params:Params}) {
+
+ async function ProductDetailsPage({params}:any) {
 
   const { id } = await params;
   const product = await fetchSingleProduct(id) 

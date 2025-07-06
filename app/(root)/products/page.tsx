@@ -3,14 +3,9 @@ import React from 'react';
 
 // This page is used to display products with different layouts based on the search parameters
 
-interface ProductsPageProps {
-  searchParams: { 
-    layout?: string 
-    search?: string
-  }
-}
 
-async function ProductsPage({searchParams}: ProductsPageProps) {
+
+async function ProductsPage({searchParams}: any) {
 
   const {layout= 'grid'} = await searchParams || {};
   const {search} = await searchParams || '';
