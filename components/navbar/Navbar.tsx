@@ -5,6 +5,8 @@ import NavSearch from './NavSearch'
 import CartButton from './CartButton'
 import DarkMode from './DarkMode'
 import LinksDropdown from './LinksDropdown'
+import SignOutLink from './SingOutLink'
+
 
 function Navbar() {
   return ( 
@@ -19,11 +21,12 @@ function Navbar() {
       <CartButton/>
       <DarkMode/>
       <LinksDropdown/>
+      
       </div>
       
     </Container>
    </nav>
   )
 }
-
+// 68
 export default Navbar

@@ -11,6 +11,7 @@ import { LuAlignLeft } from 'react-icons/lu'
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import {dropDownMenuLinks} from '@/utils/links';
+import UserIcon from './UserIcon';
 
 function LinksDropdown() {
   return (
@@ -18,6 +19,7 @@ function LinksDropdown() {
   <DropdownMenuTrigger asChild>
     <Button variant={'outline'} className='flex max-w-[100px] gap-4'>
       <LuAlignLeft className='h-6 w-6' />
+      
       
     </Button>
   </DropdownMenuTrigger>

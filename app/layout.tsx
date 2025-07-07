@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import { ThemeProvider } from "@/components/theme-provider"
 import Container from "@/components/global/Container";
+import { Toaster } from "@/components/ui/sonner";
+import {ClerkProvider} from '@clerk/nextjs'
 
 
 export const metadata: Metadata = {
@@ -16,7 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning >
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning >
       <body>
         <ThemeProvider
             attribute="class"
@@ -29,9 +32,10 @@ export default function RootLayout({
         <Container className="pt-24">
           {children}
         </Container>
-
+          <Toaster/>
         </ThemeProvider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
