@@ -14,7 +14,7 @@ function SignOutLink() {
   return (
     <SignOutButton>
       <div>
-      <Link href={'/'}className='w-full text-left ' onClick={handelLogOut}>
+      <Link href={'/'}className=' ' onClick={handelLogOut}>
       Sing Out
       </Link>
     </div>
