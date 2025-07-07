@@ -13,13 +13,13 @@ import Link from 'next/link';
 import {dropDownMenuLinks} from '@/utils/links';
 import UserIcon from './UserIcon';
 import SignOutLink from './SingOutLink';
-import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, SignInButton ,SignUpButton} from '@clerk/nextjs';
 
 function LinksDropdown() {
   return (
     <DropdownMenu>
   <DropdownMenuTrigger asChild>
-    <Button variant={'outline'} className='flex max-w-[100px] gap-4'>
+    <Button  variant={'outline'} className='flex max-w-[100px] gap-4 cursor-pointer'>
       <LuAlignLeft className='h-6 w-6' />
         <UserIcon/>
       
@@ -30,11 +30,21 @@ function LinksDropdown() {
     <SignedOut>
           <DropdownMenuItem>
               <SignInButton mode='modal'>
-                <Button className='w-full'>
+                <Button className='w-full cursor-pointer'>
                   Sign-In
                 </Button>
               </SignInButton>
+              
           </DropdownMenuItem>
+
+          <DropdownMenuItem>
+            <SignUpButton mode='modal'>
+                <Button variant={"outline"} className='w-full cursor-pointer'>
+                  Sign-Up
+                </Button>
+              </SignUpButton>
+          </DropdownMenuItem>
+
     </SignedOut>
     
     <SignedIn>
