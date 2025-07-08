@@ -1,8 +1,18 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server';
 
 const isPublicRoute = createRouteMatcher(['/','/about','/products(.*)',])
+const isAdminRoute = createRouteMatcher(['/admin(.*)']);
 
 export default clerkMiddleware(async (auth, req) => {
+  
+  const IsAdmin = (await auth()).userId === process.env.ADMIN_USER_ID;
+  // اذا اخنار مسار الادمن وهو مو ادمن تلزكه بالنعال وترجعه لمكانه
+  if(isAdminRoute(req) && !IsAdmin){
+    return NextResponse.redirect(new URL("/",req.url));
+  }
+
+  // اذا ما اختار واحد من المسارات يطلب تسجيل
   if (!isPublicRoute(req)) {
     await auth.protect()
   }

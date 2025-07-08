@@ -34,6 +34,10 @@ export const dropDownMenuLinks: NavBarLink[] = [
     href: '/orders',
     name: 'Orders'
   },
+  {
+    href: '/admin/sales',
+    name: 'dashboard' 
+  },
 
 ]
 
@@ -49,3 +53,10 @@ export const links = {
 
 // as const that represents the links in the 
 // navigation bar with their names when using object .
+
+
+export const adminLinks:NavBarLink[]= [
+  { href: '/admin/sales', name: 'sales' },
+  { href: '/admin/products', name: 'my products' },
+  { href: '/admin/products/create', name: 'create products' },
+]
