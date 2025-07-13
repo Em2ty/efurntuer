@@ -2,7 +2,7 @@ import React from 'react'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 
-function ImageInput({name}:{name:string}) {
+function ImageInput({name="image"}:{name:string}) {
   return (
     <div className='mb-2'>
         <Label htmlFor='{name}' className='capitalize mb-2'>
