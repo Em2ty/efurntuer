@@ -26,3 +26,11 @@ if(!data) throw new Error("Image Upload Faild")
 }
 
 // 91
+
+
+export const deleteImage= (url:string)=>{
+    const imageName= decodeURIComponent(url.split("/").pop() as string);
+
+    if(!imageName) throw new Error ("Invalid URL");
+    return supabase.storage.from(bucket).remove([imageName]);
+}

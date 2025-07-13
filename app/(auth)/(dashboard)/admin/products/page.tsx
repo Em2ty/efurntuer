@@ -9,10 +9,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Link from 'next/link';
-import { Award, Edit2 } from 'lucide-react';
 import { fetchAdminPosts } from '@/utils/action';
 import { formatCurrency } from '@/utils/format';
 import { links } from '@/utils/links';
+import IconButton from '@/components/admin/products/IconButton'
+import FormContainer from '@/components/form/FormContainer';
+import { deleteProductAction } from '@/utils/action';
 
 async function ProductsPage() {
   const getPosts = await fetchAdminPosts(); 
@@ -44,8 +46,10 @@ async function ProductsPage() {
                       </Link>
                     </TableCell>
                   <TableCell> {priceFormat}</TableCell>
-                  <TableCell> 
-                    <Edit2/>
+                  <TableCell className='flex gap-1 items-center'> 
+                    <IconButton actionType='edit'/>
+                    <DeleteProduct productID={id} />
+                    
                     </TableCell>
                   
                 </TableRow>
@@ -56,5 +60,19 @@ async function ProductsPage() {
     </section>
   )
 }
+
+// 92
+
+
+function DeleteProduct({productID}:{productID:string}){
+  const delete_Product= deleteProductAction.bind(null,{productID});
+  return(
+    <FormContainer action={delete_Product}>
+      <IconButton actionType='delete'/>
+  </FormContainer>
+  )
+}
+
+
 
 export default ProductsPage

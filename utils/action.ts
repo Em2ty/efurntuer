@@ -4,7 +4,8 @@ import { redirect } from 'next/navigation';
 import db from './db';
 import { currentUser } from '@clerk/nextjs/server';
 import { productSchema,validateSchema,imageSchema } from './schema';
-import {uploadImage} from '@/utils/supabase'
+import {deleteImage, uploadImage} from '@/utils/supabase'
+import { revalidatePath } from 'next/cache';
 
 // fetch all featured products
 export async function fetchFeaturedProducts() {
@@ -127,4 +128,24 @@ export const fetchAdminPosts = async ()=>{
         }
     });
     return products;
+}
+
+
+export const deleteProductAction =async (prevState : {productID:string})=>{
+     const {productID} = prevState; //id product
+     await getAdminUser();
+     try{
+        const product =  await db.product.delete({
+            where:{
+                id:productID
+            }
+        });
+
+        await deleteImage(product.image)
+        revalidatePath('/admin/product');
+        return {message: "Product Removed"}
+     }
+     catch(e){
+        return renderError(e);
+     }
 }
