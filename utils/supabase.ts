@@ -20,7 +20,7 @@ export const uploadImage =async (image:File)=>{
     }
 );
 
-if(!data) throw new Error("Image Upload Faild")
+if(!data) throw new Error("Image Upload Failed")
     return supabase.storage.from(bucket).getPublicUrl(newName).data.publicUrl;
 
 }

@@ -49,6 +49,7 @@ export const links = {
   ABOUT: { href: '/about', name: 'About' },
   CART: { href: '/cart', name: 'Cart' },
   PRODUCTS: { href: '/products', name: 'Products' },
+  AdminProducts : {href:'/admin/products', name: 'Products'},
 } as const;
 
 // as const that represents the links in the 

@@ -6,6 +6,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { productSchema,validateSchema,imageSchema } from './schema';
 import {deleteImage, uploadImage} from '@/utils/supabase'
 import { revalidatePath } from 'next/cache';
+import {links} from '@/utils/links'
 
 // fetch all featured products
 export async function fetchFeaturedProducts() {
@@ -142,10 +143,39 @@ export const deleteProductAction =async (prevState : {productID:string})=>{
         });
 
         await deleteImage(product.image)
-        revalidatePath('/admin/product');
+        // revalidatePath('/admin/product');
         return {message: "Product Removed"}
      }
      catch(e){
         return renderError(e);
      }
+}
+
+export const updateProductAction = async (prevState:any, formData: FormData)=>{
+    
+    await getAdminUser();
+
+    try{
+        const productID = formData.get('id') as string;
+        const rowData = Object.fromEntries(formData);
+
+        const validateData = validateSchema(productSchema,rowData);
+
+        await db.product.update({
+            where:{
+                id:productID
+            },
+            data:{
+                ...validateData
+            }
+        });
+        revalidatePath(`${links.AdminProducts.href}`)
+        return {message: "Product Updated Successfully !"}
+    }
+
+    catch(e){
+        return renderError(e);
+    }
+    
+    
 }
