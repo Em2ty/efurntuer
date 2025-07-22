@@ -179,3 +179,38 @@ export const updateProductAction = async (prevState:any, formData: FormData)=>{
     
     
 }
+
+export const updateProductImageAction= async (prevStat:any,formdata:FormData)=>{
+
+    await getAuthUser ();
+    try{
+        const image = formdata.get('image') as File;
+        const productID = formdata.get('id') as string;
+        const OLdImageUrl = formdata.get('url') as string;
+        
+        const validateFile = validateSchema(imageSchema,{image});
+
+        const fullPath = await uploadImage(validateFile.image);
+        await deleteImage(OLdImageUrl);
+        await db.product.update({
+            where:{
+                id:productID
+            },
+            data:{
+                image:fullPath
+            }
+        });
+        revalidatePath(`${links.AdminProducts.href}/${productID}/edit`);
+        return {
+            message:'image updated successfully'
+        }
+    }
+
+
+    catch(e){
+        return renderError(e)
+    }
+
+}
+
+// 98
