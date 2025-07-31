@@ -7,11 +7,11 @@ function CardSignInButton() {
   return (
     <SignInButton mode='modal'>
         <Button
-          variant='outline'
+          variant='default'
           size={'icon'}
           type='button'
           asChild
-          className='p2 cursor-pointer'
+          className='p-2 cursor-pointer bg-gray-700 hover:bg-gray-900 text-white rounded-xl shadow-md transition duration-200'
         >
             <FaRegHeart/>
         </Button>

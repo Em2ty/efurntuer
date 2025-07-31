@@ -1,13 +1,19 @@
+'use client'
 import React from 'react'
 import { Button } from '../ui/button'
-import { FaH } from 'react-icons/fa6'
-import { FaHeart } from 'react-icons/fa'
+import { FaRegHeart } from 'react-icons/fa'
+import { useUser } from '@clerk/nextjs';
+import CardSignInButton from '../form/CardSignInButton';
+import FavoriteToggleForm from './FavoriteToggleForm';
 
 function FavoriteToggleButton({productId}: {productId: string}) {
+
+  const {isSignedIn}= useUser();
+
+  if (!isSignedIn) return <CardSignInButton/>
+  
   return (
-    <Button size={'icon'} variant={'outline'} className='p-2 cursor-pointer'>
-    <FaHeart />
-    </Button>
+   <FavoriteToggleForm productID={productId} favoriteID={null}/>
   )
 }
 

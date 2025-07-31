@@ -214,3 +214,30 @@ export const updateProductImageAction= async (prevStat:any,formdata:FormData)=>{
 }
 
 // 98
+
+
+export const fetchFavID = async({productID}:{productID:string})=>{
+    const user = await getAuthUser();
+    const fav = await db.favorite.findFirst({
+        where:{
+            productID:productID,
+            clrekId:user.id
+        },
+        select:{
+            id:true,
+        }
+
+    });
+    return fav?.id || null;
+}
+
+type toggleFavActionProps = {
+    productID:string,
+    favoriteID:string|null,
+    pathname:string,
+
+}
+
+export const toggleFavAction=async (prevState:toggleFavActionProps)=>{
+    return {message: 'toggle fav action not implemented yet'};
+}
